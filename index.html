@@ -109,6 +109,18 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc);box
 .trk{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}.trk h3{margin:0;font-size:1rem;display:flex;gap:8px;align-items:center}.trk h3 svg{width:18px;height:18px}
 .revs{display:flex;flex-direction:column;gap:8px}.rev{border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px}.rev.new{border-color:var(--warn)}
 .p-new{background:var(--bad);color:#fff}
+.mbox h2 svg,.pkgbox h3 svg{width:22px;height:22px;vertical-align:-4px;flex:none}.pill svg{width:12px;height:12px;vertical-align:-1px;margin-right:3px}
+.gsteps{margin:0 0 8px;padding-left:22px;display:flex;flex-direction:column;gap:8px}.gsteps .small{color:var(--muted)}
+.tkk{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.tkk.mk5{grid-template-columns:repeat(5,1fr)}.tkk .kpi{padding:12px 14px}.tkk .kpi b{font-size:1.5rem}.tkk .kpi.bad b{color:var(--bad)}
+@media (max-width:640px){.tkk,.tkk.mk5{grid-template-columns:1fr 1fr}}
+.sla{display:flex;flex-wrap:wrap;gap:6px}.sla span{font-size:.78rem;padding:4px 10px;border-radius:99px;background:var(--sunk);border:1px solid var(--line)}
+.tkc{gap:6px}.tkc .tx{font-size:.84rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line}
+.due{font-size:.76rem;font-weight:700;padding:2px 8px;border-radius:99px;align-self:flex-start;background:var(--sunk);color:var(--muted)}.due.late{background:var(--bad);color:#fff}.due.soon{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn)}.due.ok{color:var(--ok)}
+.tsteps{display:flex;gap:4px;margin:2px 0}.tsteps i{flex:1;height:6px;border-radius:99px;background:var(--line)}.tsteps i.on{background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--sunk);border-radius:12px;padding:10px 12px;font-size:.92rem}
+.tlog{margin:0;padding-left:18px;font-size:.84rem;color:var(--muted)}.tfb{border-left:3px solid var(--warn);padding:4px 10px;font-size:.88rem;white-space:pre-wrap}
+.pkgbox{border:1px dashed var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.tkrow{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--solid);font:inherit;color:inherit;text-align:left;width:100%}
 .kv dt{color:var(--muted)}.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start}
 .col{padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
@@ -160,7 +172,7 @@ const fromIso=s=>s?new Date(s+'T12:00:00').getTime():'';
 const P={logo:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".6"/>',home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>',key:'<circle cx="7.5" cy="15.5" r="4.5"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/>',
  pulse:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',coin:'<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v12"/>',
- code:'<path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',plus:'<path d="M12 5v14M5 12h14"/>',copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>'};
+ code:'<path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/>',cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 7H6"/>',book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M4 17a3 3 0 0 1 3-3h11"/>',tk:'<path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2.5"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',send:'<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',plus:'<path d="M12 5v14M5 12h14"/>',copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>'};
 const icon=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]||P.info}</svg>`;
 function toast(t){const d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2500)}
 function modal(html){const m=document.createElement('div');m.className='modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
@@ -172,7 +184,7 @@ async function copy(t){try{await navigator.clipboard.writeText(t);toast('คั�
 /* ===== โหมดตัวอย่าง: ข้อมูลสมมติ ทำงานเหมือนระบบจริง ===== */
 const DEMO=!FIXED_API;
 const Mock=(()=>{
-  const now=Date.now(),day=n=>now-n*D,APPS=[{id:'dorm',name:'แอปหอพัก'},{id:'food',name:'แอปร้านอาหาร'},{id:'repair',name:'แอปร้านซ่อม / รับงาน'},{id:'queue',name:'แอปนัดคิว'},{id:'stock',name:'แอปร้านค้า / สต็อก'},{id:'custom',name:'สั่งทำตามบรีฟ'}];
+  const now=Date.now(),day=n=>now-n*D,APPS=[{id:'dorm',name:'แอปหอพัก'},{id:'food',name:'แอปร้านอาหาร'},{id:'repair',name:'แอปร้านซ่อม / รับงาน'},{id:'queue',name:'แอปนัดคิว'},{id:'stock',name:'แอปร้านค้า / สต็อก'},{id:'hotel',name:'แอปที่พักรายวัน / โรงแรม'},{id:'custom',name:'สั่งทำตามบรีฟ'}];
   let seq=100;const id=p=>p+'2611-'+(++seq);
   const db={
     cust:[['หอพักบ้านสวนจันทร์','คุณวรรณา','0861112233','dorm','ปิดการขาย','แนะนำ',40],['ศรีสุขแมนชั่น','คุณสมพร','@srisuk','dorm','ปิดการขาย','เว็บ · บรีฟ',35],['ภูผาเพลส','คุณเอก','0899876543','dorm','ส่งเดโมแล้ว','LINE',20],
@@ -206,23 +218,55 @@ const Mock=(()=>{
   db.cust.forEach((c,i)=>{c.tok=('0'.repeat(23)+i).slice(-24);c.log='[]';c.revs='[]';c.msg='';c.link='';c.work=c.stage==='ปิดการขาย'?'ติดตั้ง / ส่งมอบแล้ว':''});
   {const k=db.cust.find(c=>c.stage==='นัดคุยแล้ว');if(k){k.stage='ปิดการขาย';k.work='ส่งให้ลูกค้าตรวจ';k.link='https://asuraphongapps54-prog.github.io/repair/demo.html';k.msg='ส่งงานรอบแรกให้ลองแล้ว กดดูแล้วบอกจุดที่อยากแก้ได้เลย';
     k.revs=JSON.stringify([{at:now-3*36e5,text:'อยากให้ปุ่มสั่งอาหารใหญ่ขึ้น',st:'รอดู',kind:'แก้ไข',reply:''},{at:now-30*36e5,text:'เพิ่มเมนูเครื่องดื่มด้วย',st:'แก้แล้ว',kind:'แก้ไข',reply:'เพิ่มแล้วครับ'}]);k.alert='ใหม่'}}
-  const EDIT={cust:['org','name','contact','app','stage','source','feats','detail','users','note','work','msg','link'],pay:['at','cust','org','item','amount','method','lic','note'],dev:['app','title','kind','status','pri','ver','note'],lic:['org','type','price','expire','note','cust']};
+  const EDIT={cust:['org','name','contact','app','stage','source','feats','detail','users','note','work','msg','link','pkg'],pay:['at','cust','org','item','amount','method','lic','note'],dev:['app','title','kind','status','pri','ver','note'],lic:['org','type','price','expire','note','cust']};
+  const PKGS={p2:{name:'ปรับแต่ง 2 ครั้ง',price:699,n:2,rounds:['ก่อนใช้งานจริง','หลังลองใช้งานจริง']},p4:{name:'ปรับแต่ง 4 ครั้ง',price:1200,n:4,rounds:['ก่อนใช้งานจริง','หลังลองใช้งานจริง']}};
+  const TK_ST=['รอรับเรื่อง','รับเรื่องแล้ว','กำลังแก้','ส่งให้ตรวจ','ปิดงาน','ยกเลิก (ไม่นับครั้ง)'],TKO=TK_ST.slice(0,4),due3=t=>{const d=new Date(t+3*D);d.setHours(21,0,0,0);return d.getTime()};
+  const lg=(...a)=>a.map(([h,st])=>({at:now-h*H,st}));
+  {const S=db.cust.find(c=>c.org==='ศรีสุขแมนชั่น'),B=db.cust.find(c=>c.org==='หอพักบ้านสวนจันทร์'),N=db.cust.find(c=>c.stage==='ปิดการขาย'&&c!==S&&c!==B&&c.app!=='food')||db.cust.find(c=>c.org==='ครัวคุณยาย');
+   if(S){S.pkg='p2';S.pkgAt=day(40);S.tix=JSON.stringify([{round:'ครั้งที่ 1 · ก่อนใช้งานจริง',at:day(38),text:'1. เอาเมนูสัญญาเช่าออก (ใช้กระดาษอยู่แล้ว)\n2. เพิ่มค่าที่จอดรถในบิล\n3. เปลี่ยนชื่อ "ผู้เช่า" เป็น "ลูกบ้าน"',st:'ปิดงาน',acc:day(37.8),due:day(35),sent:day(36),done:day(35.5),link:'https://asuraphongapps54-prog.github.io/apartment/',reply:'แก้ครบ 3 ข้อแล้วครับ',fb:[],log:lg([38*24,'รอรับเรื่อง'],[37.8*24,'รับเรื่องแล้ว'],[36*24,'ส่งให้ตรวจ'],[35.5*24,'ปิดงาน'])},
+     {round:'ครั้งที่ 2 · หลังลองใช้งานจริง',at:now-30*H,text:'1. บิลอยากให้มีโลโก้หอ\n2. แจ้งเตือนห้องที่ค้างจ่ายเกิน 5 วัน',st:'กำลังแก้',acc:now-26*H,due:due3(now-26*H),fb:[],log:lg([30,'รอรับเรื่อง'],[26,'รับเรื่องแล้ว'],[20,'กำลังแก้'])}])}
+   if(B){B.pkg='p4';B.pkgAt=day(20);B.tix=JSON.stringify([{round:'ครั้งที่ 1 · ก่อนใช้งานจริง',at:day(19),text:'เพิ่มตึก B และค่าไฟ 8 บาท/หน่วย',st:'ปิดงาน',acc:day(19),due:day(16),sent:day(17),done:day(16.5),fb:[],log:lg([19*24,'รอรับเรื่อง'],[17*24,'ส่งให้ตรวจ'],[16.5*24,'ปิดงาน'])},
+     {round:'ครั้งที่ 2 · หลังลองใช้งานจริง',at:day(4),text:'1. หน้าแรกอยากเห็นยอดค้างรวม\n2. ปุ่มส่งบิลทาง LINE ใหญ่ขึ้น',st:'ส่งให้ตรวจ',acc:day(3.9),due:day(1),sent:now-20*H,link:'https://asuraphongapps54-prog.github.io/apartment/demo.html',reply:'ลองกดดูหน้าแรกได้เลยครับ',fb:[],log:lg([96,'รอรับเรื่อง'],[94,'รับเรื่องแล้ว'],[20,'ส่งให้ตรวจ'])}])}
+   if(N){N.pkg='p2';N.pkgAt=day(1);N.tix=JSON.stringify([{round:'ครั้งที่ 1 · ก่อนใช้งานจริง',at:now-3*H,text:'1. เอาเมนูพัสดุออก (ไม่ได้ใช้)\n2. ค่าน้ำเหมาจ่าย 150 บาท/ห้อง\n3. ใบเสร็จใส่ที่อยู่หอและเลขผู้เสียภาษี',st:'รอรับเรื่อง',fb:[],log:lg([3,'รอรับเรื่อง'])}]);N.alert='ใหม่'}}
+  const mTicket=(c,i,d)=>{const ts=JSON.parse(c.tix||'[]'),t=Date.now(),p=PKGS[c.pkg];
+    if(i<0){if(!p)throw new Error('เลือกแพ็กเกจปรับแต่งก่อน');const used=ts.filter(x=>x.st!==TK_ST[5]).length;if(used>=p.n)throw new Error('ใช้ ticket ครบแล้ว');if(ts.some(x=>TKO.includes(x.st)))throw new Error('ยังมีงานแก้ที่ยังไม่ปิดอยู่');if(String(d.text||'').trim().length<3)throw new Error('ใส่รายการที่ลูกค้าอยากแก้');
+      ts.push({round:'ครั้งที่ '+(used+1)+(p.rounds[used]?' · '+p.rounds[used]:''),at:t,text:d.text,st:'รอรับเรื่อง',by:'ผู้ดูแล',fb:[],log:[{at:t,st:'รอรับเรื่อง'}]})}
+    else{const x=ts[i];x.log=x.log||[];if(d.link!==undefined){if(d.link&&!/^https:\/\//.test(d.link))throw new Error('ลิงก์งานต้องขึ้นต้นด้วย https://');x.link=d.link}if(d.reply!==undefined)x.reply=d.reply;if(d.due!==undefined)x.due=d.due?Number(d.due):'';
+      if(d.st!==undefined&&d.st!==x.st){if(d.st==='ส่งให้ตรวจ'&&!x.link&&!x.reply)throw new Error('ใส่ลิงก์งานหรือข้อความบอกลูกค้าก่อนส่งให้ตรวจ');x.st=d.st;x.log.push({at:t,st:d.st});
+        if(['รับเรื่องแล้ว','กำลังแก้'].includes(d.st)&&!x.acc){x.acc=t;if(!x.due)x.due=due3(t)}if(d.st==='ส่งให้ตรวจ')x.sent=t;if(d.st==='ปิดงาน')x.done=t;if(d.st!=='รอรับเรื่อง')delete x.wait}if(d.seen)delete x.wait}
+    c.tix=JSON.stringify(ts);c.alert=JSON.parse(c.revs||'[]').some(r=>r.st==='รอดู')||ts.some(x=>x.st==='รอรับเรื่อง'||x.wait)?'ใหม่':'';c.upd=t;return c};
   const K='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',rk=()=>Array.from({length:3},()=>Array.from({length:4},()=>K[Math.floor(Math.random()*K.length)]).join('')).join('-');
+  db.ord=[['ร้านชำป้าแดง','ป้าแดง','0845678901','stock','pro',299,'รอตรวจสลิป',.1],['บ้านพักริมน้ำ','แพร','@prae','hotel','pro',299,'ยืนยันแล้ว',3],['ศรีสุขแมนชั่น','คุณสมพร','@srisuk','dorm','p2',699,'ยืนยันแล้ว',12],['ร้านผมสวย','นิด','0811212121','queue','pro',299,'ไม่ผ่าน',6]]
+    .map(([org,name,contact,app,item,amount,status,d],i)=>({id:'O2611-00'+(i+1),at:day(d),tok:('1'.repeat(23)+i).slice(-24),app,item,amount,org,name,contact,slip:'demo-slip',status,reason:status==='ไม่ผ่าน'?'ยอดโอนไม่ตรง กรุณาโอนเพิ่ม 10 บาท':'',
+      lic:status==='ยืนยันแล้ว'&&item==='pro'?app.slice(0,2).toUpperCase()+'-'+rk():'',cust:'',pay:'',okAt:status==='ยืนยันแล้ว'?day(d-.1):'',dl:status==='ยืนยันแล้ว'?2:0,note:'',alert:status==='รอตรวจสลิป'?'ใหม่':''}));
+    db.mem=[['dang.shop@gmail.com','0845678901',1,.1,3,0],['prae.home@gmail.com','0891112233',1,3,2,1],['srisuk.mansion@gmail.com','0823334444',1,12,1,0],['nid.salon@gmail.com','0811212121',1,6,0,1],['newbie@gmail.com','0899990000',0,.02,0,0]]
+    .map(([email,phone,v,d,dl,mkt],i)=>({id:'M'+String(i+1).padStart(4,'0'),at:day(d+1),email,phone,name:'',verified:v?'ใช่':'',vAt:v?day(d+1):'',terms:v?'2569-11-13':'',consentAt:v?day(d+1):'',tokExp:'',seen:day(d),dl,status:v?'ใช้งาน':'รอยืนยันอีเมล',note:'',mkt:mkt?'ใช่':''}));
+  db.dl=db.mem.filter(m=>m.dl).flatMap(m=>Array.from({length:m.dl},(_,j)=>({id:'DL'+m.id+j,at:day(j+.5),mem:m.id,email:m.email,app:['stock','hotel','dorm','queue'][j%4],kind:'ฟรี'})));
+  db.ord.forEach((o,i)=>o.mem=db.mem[i]?db.mem[i].id:'');
+  const ITEMS={pro:{name:'แพ็กเกจโปร (ซื้อขาด)',price:299},p2:{name:'แพ็กเกจปรับแต่ง 2 ครั้ง',price:699},p4:{name:'แพ็กเกจปรับแต่ง 4 ครั้ง',price:1200}};let PF={stock:{id:'1demoStockProFile0000000000',name:'stock-Code.pro.gs',upd:day(1)}},FF={stock:{id:'1demoStockFreeFile000000000',name:'stock-Code.free.gs',upd:day(1)},hotel:{id:'1demoHotelFreeFile000000000',name:'hotel-Code.free.gs',upd:day(2)}};
   const api={
     apiLogin:()=>({token:'demo',hours:12}),apiLogout:()=>true,
-    apiAll:()=>Object.assign({apps:APPS,stages:['ใหม่','ติดต่อแล้ว','นัดคุยแล้ว','ส่งเดโมแล้ว','ปิดการขาย','ไม่สนใจ'],licTypes:['ขายขาด'],proPrice:359,devStatus:['ไอเดีย','กำลังทำ','ทดสอบ','เสร็จ'],now:Date.now(),offlineHours:48,
-      work:WORK_M,pubStage:{},revSt:['รอดู','กำลังแก้','แก้แล้ว','ไม่แก้ (คุยแล้ว)'],siteUrl:'https://asuraphongapps54-prog.github.io/web/'},JSON.parse(JSON.stringify(db))),
+    apiAll:()=>Object.assign({apps:APPS,stages:['ใหม่','ติดต่อแล้ว','นัดคุยแล้ว','ส่งเดโมแล้ว','ปิดการขาย','ไม่สนใจ'],licTypes:['ขายขาด'],proPrice:299,pkgs:PKGS,tkSt:TK_ST,sla:{hours:3,days:3,points:5,review:7},devStatus:['ไอเดีย','กำลังทำ','ทดสอบ','เสร็จ'],now:Date.now(),offlineHours:48,
+      work:WORK_M,pubStage:{},revSt:['รอดู','กำลังแก้','แก้แล้ว','ไม่แก้ (คุยแล้ว)'],siteUrl:'https://asuraphongapps54-prog.github.io/web/',ordSt:['รอตรวจสลิป','ยืนยันแล้ว','ไม่ผ่าน'],sellApps:['dorm','repair','stock','hotel','queue','food'],items:ITEMS,proFiles:PF,freeFiles:FF,termsV:'2569-11-14'},JSON.parse(JSON.stringify(db))),
     apiSave:(t,k,d)=>{let o=d.id?db[k].find(r=>r.id===d.id):null;if(!o){if(k==='lic')throw new Error('สร้างไลเซนส์จากปุ่ม "ออกไลเซนส์" เท่านั้น');o={id:id({cust:'C',pay:'P',dev:'D'}[k]),at:Date.now()};db[k].push(o)}
       EDIT[k].forEach(f=>{if(d[f]!==undefined)o[f]=f==='amount'||f==='price'?Number(d[f])||0:d[f]});
-      if(k==='cust'){if(!o.org&&!o.name){db[k].pop();throw new Error('ใส่ชื่อกิจการหรือชื่อผู้ติดต่อ')}o.upd=Date.now()}
+      if(k==='cust'){if(!o.org&&!o.name){db[k].pop();throw new Error('ใส่ชื่อกิจการหรือชื่อผู้ติดต่อ')}if(o.pkg&&!PKGS[o.pkg])o.pkg='';if(o.pkg&&!o.pkgAt)o.pkgAt=Date.now();if(!o.pkg)o.pkgAt='';if(!o.tix)o.tix='[]';o.upd=Date.now()}
       if(k==='pay'&&!(o.amount>0)){db[k].splice(db[k].indexOf(o),1);throw new Error('จำนวนเงินต้องมากกว่า 0')}
       if(k==='dev'){if(!o.title){db[k].pop();throw new Error('ใส่หัวข้องาน')}o.done=o.status==='เสร็จ'?(o.done||Date.now()):''}return o},
     apiDelete:(t,k,i)=>{db[k]=db[k].filter(r=>r.id!==i);return true},
+    apiTicket:(t,i,n,d)=>mTicket(db.cust.find(r=>r.id===i),n,d||{}),
+    apiOrderOk:(t,i,d)=>{const o=db.ord.find(r=>r.id===i);if(o.status==='ยืนยันแล้ว')throw new Error('ยืนยันไปแล้ว');o.status='ยืนยันแล้ว';o.org=d.org||o.org;o.amount=Number(d.amount)||o.amount;o.okAt=Date.now();o.alert='';o.reason=d.msg||'';
+      if(o.item==='pro'){o.lic=o.app.slice(0,2).toUpperCase()+'-'+rk();db.lic.push({id:o.lic,at:Date.now(),cust:'',org:o.org,app:o.app,type:'ขายขาด',price:o.amount,expire:'',status:'ยังไม่เปิดใช้',sheet:'',actAt:'',seen:'',dup:'',note:'ซื้อเองผ่านเว็บ '+o.id})}
+      db.pay.push({id:id('P'),at:Date.now(),cust:'',org:o.org,item:ITEMS[o.item].name,amount:o.amount,method:'โอน / พร้อมเพย์',lic:o.lic,note:'คำสั่งซื้อ '+o.id});return o},
+    apiOrderNo:(t,i,why)=>{const o=db.ord.find(r=>r.id===i);o.status='ไม่ผ่าน';o.reason=why;o.alert='';return o},
+    apiProFiles:(t,m)=>{Object.keys(m).forEach(a=>{if(!m[a])delete PF[a];else{if(!/drive\.google\.com\/file\/d\//.test(m[a]))throw new Error('ลิงก์ไฟล์ไม่ถูกต้อง');PF[a]={id:(/\/d\/([\w-]+)/.exec(m[a])||[])[1],name:a+'-Code.pro.gs',upd:Date.now()}}});return PF},
+    apiFreeFiles:(t,m)=>{Object.keys(m).forEach(a=>{if(!m[a])delete FF[a];else{if(!/drive\.google\.com\/file\/d\//.test(m[a]))throw new Error('ลิงก์ไฟล์ไม่ถูกต้อง');FF[a]={id:(/\/d\/([\w-]+)/.exec(m[a])||[])[1],name:a+'-Code.free.gs',upd:Date.now()}}});return FF},
+    apiMemberDel:(t,i)=>{const m=db.mem.find(r=>r.id===i);Object.assign(m,{email:'ลบแล้ว-'+m.id,phone:'',name:'',status:'ลบแล้ว',note:'ลบตามคำขอ'});return true},
     apiSeen:(t,i)=>{const c=db.cust.find(r=>r.id===i);if(c)c.alert='';return true},
-    apiRev:(t,i,n,st,reply)=>{const c=db.cust.find(r=>r.id===i),rs=JSON.parse(c.revs||'[]');rs[n].st=st;if(reply!==undefined)rs[n].reply=reply;c.revs=JSON.stringify(rs);c.alert=rs.some(r=>r.st==='รอดู')?'ใหม่':'';return c},
+    apiRev:(t,i,n,st,reply)=>{const c=db.cust.find(r=>r.id===i),rs=JSON.parse(c.revs||'[]');rs[n].st=st;if(reply!==undefined)rs[n].reply=reply;c.revs=JSON.stringify(rs);c.alert=rs.some(r=>r.st==='รอดู')||JSON.parse(c.tix||'[]').some(x=>x.st==='รอรับเรื่อง'||x.wait)?'ใหม่':'';return c},
     apiNewLicense:(t,d)=>{if(!d.org)throw new Error('ใส่ชื่อกิจการที่ซื้อ (จะแสดงท้ายแอปของลูกค้า)');const o={id:d.app.slice(0,2).toUpperCase()+'-'+rk(),at:Date.now(),cust:d.cust||'',org:d.org,app:d.app,type:d.type,price:Number(d.price)||0,expire:d.expire||'',status:'ยังไม่เปิดใช้',sheet:'',actAt:'',seen:'',dup:'',note:d.note||''};
       db.lic.push(o);const c=db.cust.find(x=>x.id===o.cust);if(c)c.stage='ปิดการขาย';return o},
-    apiLicense:(t,key,a)=>{const o=db.lic.find(r=>r.id===key);if(a==='revoke')o.status='ยกเลิก';if(a==='restore')o.status=o.sheet?'ใช้งาน':'ยังไม่เปิดใช้';if(a==='unbind'){o.sheet='';o.status='ยังไม่เปิดใช้';o.dup=''}return o},
+    apiLicense:(t,key,a)=>{const o=db.lic.find(r=>r.id===key);if(a==='revoke')o.status='ยกเลิก';if(a==='restore')o.status=o.sheet?'ใช้งาน':'ยังไม่เปิดใช้';if(a==='unbind'){o.sheet='';o.status='ยังไม่เปิดใช้';o.dup=''}if(a==='cust1'||a==='cust2')o[a]=o[a]?'':Date.now();return o},
     apiRelease:(t,d)=>{if(!/^\d+\.\d+(\.\d+)?$/.test(d.ver||''))throw new Error('เวอร์ชันใช้รูปแบบ 1.5.0');const o={id:id('R'),at:Date.now(),app:d.app,ver:d.ver,notes:d.notes||''};db.rel.push(o);return o}};
   return {api};
 })();
@@ -243,7 +287,7 @@ function login(){
 
 /* ===== ข้อมูลและแท็บ ===== */
 let A=null,tab='home',view={};
-const TABS=[['home','ภาพรวม','home'],['cust','ลูกค้า','users'],['lic','ไลเซนส์','key'],['inst','การติดตั้ง','pulse'],['pay','รายรับ','coin'],['dev','พัฒนา','code']];
+const TABS=[['home','ภาพรวม','home'],['cust','ลูกค้า','users'],['ord','คำสั่งซื้อ','cart'],['mem','สมาชิก','users'],['work','งานแก้','tk'],['lic','ไลเซนส์','key'],['inst','การติดตั้ง','pulse'],['pay','รายรับ','coin'],['dev','พัฒนา','code']];
 const appName=id=>(A.apps.find(a=>a.id===id)||{name:id||'-'}).name;
 const statsOf=i=>{try{return JSON.parse(i.stats||'{}')}catch(e){return {}}};
 const online=i=>i.seen&&Date.now()-i.seen<A.offlineHours*H;
@@ -259,19 +303,27 @@ function alerts(){
   A.lic.filter(l=>l.dup).forEach(l=>out.push(['bad','key',`มีคนพยายามใช้ไลเซนส์ ${l.id} กับชีตอื่น`,`ไลเซนส์ของ ${l.org} · ${l.dup.split(',').length} ชีต`,'lic']));
   A.inst.filter(i=>!online(i)).forEach(i=>out.push(['warn','pulse',`${i.org||'ไม่ทราบชื่อ'} ไม่ส่งสัญญาณ ${ago(i.seen)}`,'อาจเลิกใช้ หรือระบบอัตโนมัติหยุด ลองทักไปถาม','inst']));
   A.lic.filter(l=>l.expire&&l.expire>now&&l.expire-now<30*D).forEach(l=>out.push(['warn','coin',`${l.type==='ขายขาด'?'ค่าดูแล (MA)':'ไลเซนส์'+l.type} ของ ${l.org} หมด ${dTH(l.expire)}`,'ทักไปเสนอต่ออายุ','lic']));
+  (A.ord||[]).filter(o=>o.status==='รอตรวจสลิป').forEach(o=>out.push(['bad','cart',`สลิปใหม่รอตรวจ: ${o.org} · ${baht(o.amount)} บาท`,`${(A.items[o.item]||{}).name||o.item} · ${appName(o.app)} · ส่งมา ${ago(o.at)}`,'ord']));
+  [...new Set((A.ord||[]).filter(o=>o.item==='pro').map(o=>o.app))].filter(a=>!(A.proFiles||{})[a]).forEach(a=>out.push(['warn','code',`ยังไม่ได้ตั้งไฟล์โค้ดโปรของ ${appName(a)}`,'ลูกค้าที่ยืนยันแล้วจะดาวน์โหลดโค้ดไม่ได้ ตั้งที่แท็บคำสั่งซื้อ → ไฟล์โค้ดโปร','ord']));
+  allTix().forEach(({c,x})=>{const o=c.org||c.name;
+    if(x.st==='รอรับเรื่อง')out.push(['bad','tk',`ticket ใหม่: ${o} (${x.round})`,`ส่งมา ${ago(x.at)} · กดรับเรื่องเพื่อเริ่มนับกำหนดส่ง ${A.sla.days} วัน`,'work']);
+    else if(x.wait)out.push(['warn','tk',`${o} ขอแก้ต่อใน${x.round}`,'ลูกค้าตรวจแล้วยังไม่ตรง ดูความเห็นในงานแก้','work']);
+    if(tkLate(x))out.push(['bad','clock',`งานแก้เกินกำหนด: ${o}`,`${x.round} · กำหนดส่ง ${dtTH(x.due)} · ทักบอกลูกค้าว่าจะส่งเมื่อไร`,'work']);
+    else if(tkSoon(x))out.push(['warn','clock',`ใกล้กำหนดส่ง: ${o}`,`${x.round} · ส่งภายใน ${dtTH(x.due)}`,'work']);
+    if(x.st==='ส่งให้ตรวจ'&&x.sent&&now-x.sent>A.sla.review*D)out.push(['info','tk',`${o} ยังไม่ตอบงานที่ส่งให้ตรวจ`,`ส่งไป ${ago(x.sent)} · ทักถาม หรือกดปิดงานได้`,'work'])});
   A.lic.filter(l=>l.status==='ยังไม่เปิดใช้'&&Date.now()-l.at>7*D).forEach(l=>out.push(['info','key',`${l.org} ยังไม่เปิดใช้ไลเซนส์`,`ออกให้ ${ago(l.at)} อาจต้องช่วยติดตั้ง`,'lic']));
-  A.cust.filter(c=>c.alert).forEach(c=>out.push(['warn','users',`${c.org||c.name} ส่งข้อความ / ขอแก้งานมา`,'เปิดดูในหน้าลูกค้า แล้วตอบหรืออัปเดตสถานะ','cust']));
+  A.cust.filter(c=>c.alert&&jarr(c.revs).some(r=>r.st==='รอดู')).forEach(c=>out.push(['warn','users',`${c.org||c.name} ส่งข้อความมา`,'เปิดดูในหน้าลูกค้า แล้วตอบหรืออัปเดตสถานะ','cust']));
   const nw=A.cust.filter(c=>c.stage==='ใหม่');if(nw.length)out.push(['info','users',`บรีฟ/ลูกค้าใหม่ ${nw.length} ราย รอติดต่อ`,nw.slice(0,3).map(c=>c.org||c.name).join(' · '),'cust']);
   A.apps.forEach(a=>{const L=latest(a.id);if(!L)return;const old=A.inst.filter(i=>i.app===a.id&&verN(i.ver)<verN(L.ver)&&online(i));if(old.length)out.push(['info','code',`${a.name} ${old.length} แห่งยังใช้เวอร์ชันเก่ากว่า ${L.ver}`,old.map(i=>i.org).slice(0,3).join(' · '),'inst'])});
   return out;
 }
 function paintTabs(){const n=alerts().filter(a=>a[0]!=='info').length;
-  $('#tabs').innerHTML=TABS.map(([k,l,i])=>`<button role="tab" aria-selected="${tab===k}" data-tab="${k}">${icon(i)}${l}${k==='home'&&n?`<span class="cnt">${n}</span>`:''}${k==='cust'&&A.cust.filter(c=>c.stage==='ใหม่').length?`<span class="cnt" style="background:var(--info)">${A.cust.filter(c=>c.stage==='ใหม่').length}</span>`:''}</button>`).join('');
+  $('#tabs').innerHTML=TABS.map(([k,l,i])=>`<button role="tab" aria-selected="${tab===k}" data-tab="${k}">${icon(i)}${l}${k==='home'&&n?`<span class="cnt">${n}</span>`:''}${k==='ord'&&ordNew()?`<span class="cnt">${ordNew()}</span>`:''}${k==='work'&&tkHot()?`<span class="cnt">${tkHot()}</span>`:''}${k==='cust'&&A.cust.filter(c=>c.stage==='ใหม่').length?`<span class="cnt" style="background:var(--info)">${A.cust.filter(c=>c.stage==='ใหม่').length}</span>`:''}</button>`).join('');
   $('#tabs').querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;view={};render()})}
 async function load(){A=await run('apiAll',tok())}
 async function start(){$('#tabs').hidden=false;$('#out').hidden=false;$('#demo').hidden=!DEMO;app.innerHTML='<div class="sk"></div>';try{await load();render()}catch(e){app.innerHTML=errBox(e.message)}}
 async function refresh(msg){await load();render();if(msg)toast(msg)}
-function render(){paintTabs();({home:vHome,cust:vCust,lic:vLic,inst:vInst,pay:vPay,dev:vDev})[tab]();window.scrollTo(0,0)}
+function render(){paintTabs();({home:vHome,ord:vOrd,mem:vMem,work:vWork,cust:vCust,lic:vLic,inst:vInst,pay:vPay,dev:vDev})[tab]();window.scrollTo(0,0)}
 
 /* ===== ภาพรวม ===== */
 function vHome(){
@@ -324,7 +376,7 @@ function vCust(){
   app.innerHTML=`<section class="panel glass"><div class="ph"><h2>ลูกค้าและบรีฟ</h2><button class="btn btn-acc" id="add">${icon('plus')}เพิ่มลูกค้า</button></div>
     <div class="tool"><div class="chips">${[['active','กำลังดำเนินการ'],...A.stages.map(s=>[s,s]),['all','ทั้งหมด']].map(([k,l])=>`<button class="chip" data-st="${esc(k)}" aria-pressed="${st===k}">${esc(l)}<b>${k==='all'?A.cust.length:k==='active'?A.cust.filter(isActive).length:A.cust.filter(c=>c.stage===k).length}</b></button>`).join('')}</div>
       <input class="search" id="q" placeholder="ค้นหาชื่อ เบอร์ LINE" value="${esc(view.q||'')}" aria-label="ค้นหาลูกค้า"></div>
-    <div class="list">${rs.map(c=>`<div class="row" data-id="${esc(c.id)}" tabindex="0"><div class="m"><b>${esc(c.org||c.name)}${c.alert?' <span class="pill p-new">ข้อความใหม่</span>':''}</b><div class="s">${c.work&&c.stage==='ปิดการขาย'?'<b>'+esc(c.work)+'</b> · ':''}${esc(appName(c.app))} · ${esc(c.name)} · ${esc(c.contact)} · ${esc(c.source||'')} · ${ago(c.upd||c.at)}</div></div>${stPill(c.stage)}</div>`).join('')||'<div class="empty">ไม่มีลูกค้าในกลุ่มนี้</div>'}</div></section>`;
+    <div class="list">${rs.map(c=>`<div class="row" data-id="${esc(c.id)}" tabindex="0"><div class="m"><b>${esc(c.org||c.name)}${c.alert?' <span class="pill p-new">ใหม่</span>':''}${c.pkg&&A.pkgs[c.pkg]?` <span class="pill p-acc">${icon('tk')}${pkgLeft(c)}/${A.pkgs[c.pkg].n}</span>`:''}</b><div class="s">${c.work&&c.stage==='ปิดการขาย'?'<b>'+esc(c.work)+'</b> · ':''}${esc(appName(c.app))} · ${esc(c.name)} · ${esc(c.contact)} · ${esc(c.source||'')} · ${ago(c.upd||c.at)}</div></div>${stPill(c.stage)}</div>`).join('')||'<div class="empty">ไม่มีลูกค้าในกลุ่มนี้</div>'}</div></section>`;
   app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{view.st=b.dataset.st;vCust()});
   const qi=$('#q');qi.oninput=()=>{view.q=qi.value;clearTimeout(qi._t);qi._t=setTimeout(()=>{vCust();const n=$('#q');n.focus();n.setSelectionRange(n.value.length,n.value.length)},250)};
   app.querySelectorAll('[data-id]').forEach(r=>r.onclick=r.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter')return;custForm(A.cust.find(c=>c.id===r.dataset.id))});
@@ -337,7 +389,7 @@ const jarr=v=>{try{const a=JSON.parse(v||'[]');return Array.isArray(a)?a:[]}catc
 function trackBox(c){const u=trackUrl(c),rs=jarr(c.revs),lg=jarr(c.log);
   return `<div class="trk"><h3>${icon('users')} หน้าติดตามของลูกค้า</h3>
     ${u?`<div class="small muted">ลูกค้าเห็นสถานะ ข้อความ และส่งคำขอแก้ไขได้จากลิงก์นี้ · <span class="mono">${esc(u)}</span></div>
-      <div class="tool"><a class="btn" id="t-line" href="https://line.me/R/msg/text/?${encodeURIComponent(`สวัสดีครับ คุณ${c.name||''}\nติดตามสถานะบรีฟ ${c.id} ได้ที่ลิงก์นี้ครับ\n${u}\n(ส่งข้อความหรือขอแก้งานได้จากหน้านี้เลย)`)}" target="_blank" rel="noopener">${icon('copy')}ส่งลิงก์ทาง LINE</a><button class="btn" id="t-copy" type="button">คัดลอกลิงก์</button><a class="btn" href="${esc(u)}" target="_blank" rel="noopener">เปิดดูแบบลูกค้า</a></div>`
+      <div class="tool"><a class="btn" id="t-line" href="https://line.me/R/msg/text/?${encodeURIComponent(`สวัสดีครับ คุณ${String(c.name||'').replace(/^คุณ\s*/,'')}\nติดตามสถานะบรีฟ ${c.id} ได้ที่ลิงก์นี้ครับ\n${u}\n(ส่งข้อความหรือขอแก้งานได้จากหน้านี้เลย)`)}" target="_blank" rel="noopener">${icon('copy')}ส่งลิงก์ทาง LINE</a><button class="btn" id="t-copy" type="button">คัดลอกลิงก์</button><a class="btn" href="${esc(u)}" target="_blank" rel="noopener">เปิดดูแบบลูกค้า</a></div>`
       :'<div class="alert a-info small">ยังไม่รู้ที่อยู่เว็บไซต์ ลิงก์จะขึ้นเองหลังมีบรีฟแรกส่งมาจากเว็บ</div>'}
     <div class="f2"><div class="field"><label for="c-work">สถานะงาน <span class="small muted">(หลังตกลงทำ)</span></label><select id="c-work"><option value="">—</option>${opts(A.work||[],c.work||'')}</select></div>
       <div class="field"><label for="c-link">ลิงก์ให้ลูกค้าดู <span class="small muted">(เดโม / งานให้ตรวจ)</span></label><input id="c-link" value="${esc(c.link||'')}" placeholder="https://..."></div></div>
@@ -359,14 +411,180 @@ function custForm(c){
       <div class="f2"><div class="field"><label for="c-contact">เบอร์ / LINE</label><input id="c-contact" value="${esc(c.contact||'')}"></div><div class="field"><label for="c-app">แอป</label><select id="c-app">${opts(A.apps.map(a=>[a.id,a.name]),c.app)}</select></div></div>
       <div class="f2"><div class="field"><label for="c-stage">ขั้นการขาย</label><select id="c-stage">${opts(A.stages,c.stage)}</select></div><div class="field"><label for="c-src">มาจาก</label><input id="c-src" value="${esc(c.source||'')}"></div></div>
       <div class="field"><label for="c-note">บันทึก <span class="small muted">(ภายใน ลูกค้าไม่เห็น)</span></label><textarea id="c-note" placeholder="คุยอะไรไปแล้ว นัดครั้งถัดไปเมื่อไร">${esc(c.note||'')}</textarea></div>
-      ${!n?trackBox(c):''}
+      ${!n?pkgBox(c)+trackBox(c):''}
       <div id="c-err"></div><div class="tool"><button class="btn btn-acc" id="c-save">บันทึก</button>${!n?`<button class="btn" id="c-lic">${icon('key')}ออกไลเซนส์</button><button class="btn" id="c-pay">${icon('coin')}บันทึกรายรับ</button><button class="btn btn-bad" id="c-del" style="margin-left:auto">ลบ</button>`:''}</div></div>`);
   const v=i=>{const x=mm.el.querySelector('#'+i);return x?x.value:undefined};
-  if(!n){bindTrack(mm,c);if(c.alert)run('apiSeen',tok(),c.id).then(()=>{c.alert='';paintTabs()}).catch(()=>{})}
-  mm.el.querySelector('#c-save').onclick=async e=>{e.target.disabled=true;try{await run('apiSave',tok(),'cust',{id:c.id,org:v('c-org'),name:v('c-name'),contact:v('c-contact'),app:v('c-app'),stage:v('c-stage'),source:v('c-src'),note:v('c-note'),work:v('c-work'),msg:v('c-msg'),link:v('c-link')});mm.close();refresh('บันทึกแล้ว ลูกค้าเห็นสถานะใหม่ในหน้าติดตามแล้ว')}catch(x){mm.el.querySelector('#c-err').innerHTML=errBox(x.message);e.target.disabled=false}};
+  if(!n){bindTrack(mm,c);bindPkg(mm,c);if(c.alert)run('apiSeen',tok(),c.id).then(()=>{c.alert='';paintTabs()}).catch(()=>{})}
+  mm.el.querySelector('#c-save').onclick=async e=>{e.target.disabled=true;try{await run('apiSave',tok(),'cust',{id:c.id,org:v('c-org'),name:v('c-name'),contact:v('c-contact'),app:v('c-app'),stage:v('c-stage'),source:v('c-src'),note:v('c-note'),work:v('c-work'),msg:v('c-msg'),link:v('c-link'),pkg:v('c-pkg')});mm.close();refresh('บันทึกแล้ว ลูกค้าเห็นสถานะใหม่ในหน้าติดตามแล้ว')}catch(x){mm.el.querySelector('#c-err').innerHTML=errBox(x.message);e.target.disabled=false}};
   if(!n){mm.el.querySelector('#c-lic').onclick=()=>{mm.close();licForm(c)};mm.el.querySelector('#c-pay').onclick=()=>{mm.close();payForm({cust:c.id,org:c.org||c.name})};
     const del=mm.el.querySelector('#c-del');del.onclick=async()=>{if(del.dataset.k!=='1'){del.dataset.k='1';del.textContent='กดอีกครั้งเพื่อลบ';return}await run('apiDelete',tok(),'cust',c.id);mm.close();refresh('ลบแล้ว')}}
 }
+
+/* ===== งานแก้ (ticket จากแพ็กเกจปรับแต่ง) ===== */
+const TK_FLOW=['รอรับเรื่อง','รับเรื่องแล้ว','กำลังแก้','ส่งให้ตรวจ','ปิดงาน'];
+const TK_OPEN=['รอรับเรื่อง','รับเรื่องแล้ว','กำลังแก้','ส่งให้ตรวจ'];
+const allTix=()=>A.cust.flatMap(c=>jarr(c.tix).map((x,i)=>({c,x,i})));
+const tkLate=x=>['รับเรื่องแล้ว','กำลังแก้'].includes(x.st)&&x.due&&x.due<Date.now();
+const tkSoon=x=>['รับเรื่องแล้ว','กำลังแก้'].includes(x.st)&&x.due&&x.due>=Date.now()&&x.due-Date.now()<D;
+const tkHot=()=>allTix().filter(({x})=>x.st==='รอรับเรื่อง'||x.wait||tkLate(x)).length;
+const pkgLeft=c=>{const p=A.pkgs[c.pkg];return p?Math.max(0,p.n-jarr(c.tix).filter(x=>x.st!==A.tkSt[5]).length):0};
+const tkPill=st=>`<span class="pill ${({'รอรับเรื่อง':'p-new','รับเรื่องแล้ว':'p-info','กำลังแก้':'p-acc','ส่งให้ตรวจ':'p-warn','ปิดงาน':'p-ok'})[st]||'p-mute'}">${esc(st)}</span>`;
+function dueTag(x){if(!x.due||!TK_OPEN.includes(x.st)||x.st==='ส่งให้ตรวจ')return '';const h=Math.round((x.due-Date.now())/H);
+  return h<0?`<span class="due late">เกินกำหนด ${h>-24?(-h)+' ชม.':Math.round(-h/24)+' วัน'}</span>`:h<24?`<span class="due soon">ส่งภายใน ${h} ชม.</span>`:`<span class="due ok">ส่งภายใน ${Math.round(h/24)} วัน</span>`}
+const tSteps=st=>{const k=TK_FLOW.indexOf(st);return `<div class="tsteps" aria-hidden="true">${TK_FLOW.map((_,i)=>`<i class="${i<=k?'on':''}"></i>`).join('')}</div>`};
+function slaChips(){const s=A.sla;return `<div class="sla"><span>1 ticket = แก้ 1 รอบ</span><span>เนื้องานไม่เกิน ${s.hours} ชม.</span><span>ไม่เกิน ${s.points} จุด</span><span>ส่งให้ตรวจภายใน ${s.days} วัน</span><span>ลูกค้าขอแก้ต่อในรอบเดิมได้ ไม่เสีย ticket</span></div>`}
+function vWork(){
+  const T=allTix(),now=Date.now(),cnt=f=>T.filter(f).length;
+  const cols=[['รอรับเรื่อง',t=>t.x.st==='รอรับเรื่อง'],['กำลังแก้',t=>['รับเรื่องแล้ว','กำลังแก้'].includes(t.x.st)],['รอลูกค้าตรวจ',t=>t.x.st==='ส่งให้ตรวจ'],['ปิดงาน 30 วันล่าสุด',t=>t.x.st==='ปิดงาน'&&now-(t.x.done||t.x.at)<30*D]];
+  const ord=(a,b)=>(b.x.wait?1:0)-(a.x.wait?1:0)||(a.x.due||a.x.at)-(b.x.due||b.x.at);
+  const left=A.cust.filter(c=>c.pkg&&pkgLeft(c)>0&&!jarr(c.tix).some(x=>TK_OPEN.includes(x.st)));
+  app.innerHTML=`<div class="stack"><section class="panel glass"><div class="ph"><h2>งานแก้ (ticket)</h2><span class="small muted">จากแพ็กเกจปรับแต่ง 699 / 1,200 บาท</span></div>
+    ${slaChips()}
+    <div class="tkk" style="margin-top:12px">
+      <div class="kpi glass"><small>รอรับเรื่อง</small><b>${cnt(t=>t.x.st==='รอรับเรื่อง')}</b></div>
+      <div class="kpi glass"><small>กำลังแก้</small><b>${cnt(t=>['รับเรื่องแล้ว','กำลังแก้'].includes(t.x.st))}</b></div>
+      <div class="kpi glass"><small>รอลูกค้าตรวจ</small><b>${cnt(t=>t.x.st==='ส่งให้ตรวจ')}</b></div>
+      <div class="kpi glass ${cnt(t=>tkLate(t.x))?'bad':''}"><small>เกินกำหนด</small><b>${cnt(t=>tkLate(t.x))}</b></div></div></section>
+    <div class="board">${cols.map(([h,f])=>{const L=T.filter(f).sort(ord);return `<section class="col panel glass"><h3>${esc(h)}<span class="muted">${L.length}</span></h3>
+      ${L.map(({c,x,i})=>`<button class="card tkc" data-c="${esc(c.id)}" data-i="${i}"><b>${esc(c.org||c.name)}</b><span class="small muted">${esc(x.round)} · ${esc(appName(c.app))}</span>${tSteps(x.st)}
+        <span class="tx">${esc(x.text)}</span>${x.wait?'<span class="pill p-new">ลูกค้าขอแก้ต่อ</span>':''}${dueTag(x)}${x.st==='ส่งให้ตรวจ'?`<span class="small muted">ส่งให้ตรวจ ${ago(x.sent)}</span>`:''}</button>`).join('')||'<div class="empty small">ว่าง</div>'}</section>`}).join('')}</div>
+    <section class="panel glass"><div class="ph"><h3>ลูกค้าที่ยังมี ticket เหลือ</h3><span class="small muted">${left.length} ราย</span></div>
+      <div class="list">${left.map(c=>`<div class="row" data-cu="${esc(c.id)}" tabindex="0"><div class="m"><b>${esc(c.org||c.name)}</b><div class="s">${esc(A.pkgs[c.pkg].name)} · เหลือ ${pkgLeft(c)} ครั้ง · ซื้อ ${dTH(c.pkgAt)}</div></div><span class="pill p-acc">${pkgLeft(c)}/${A.pkgs[c.pkg].n}</span></div>`).join('')||'<div class="empty small">ไม่มี</div>'}</div></section></div>`;
+  app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>tkModal(A.cust.find(c=>c.id===b.dataset.c),+b.dataset.i));
+  app.querySelectorAll('[data-cu]').forEach(r=>r.onclick=r.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter')return;custForm(A.cust.find(c=>c.id===r.dataset.cu))});
+}
+/* ข้อความอัปเดตถึงลูกค้า (ส่งทาง LINE เอง ไม่มีส่งอัตโนมัติ) */
+function tkMsg(c,x){const u=trackUrl(c),L=[`สวัสดีครับ คุณ${String(c.name||'').replace(/^คุณ\s*/,'')}`,`อัปเดตงานแก้ ${x.round}${c.org?' · '+c.org:''}`,`สถานะ: ${x.st}`];
+  if(x.st==='รับเรื่องแล้ว'||x.st==='กำลังแก้')L.push(`กำหนดส่งให้ตรวจ: ${dtTH(x.due)}`);
+  if(x.st==='ส่งให้ตรวจ'){if(x.link)L.push(`ลองกดดูได้ที่: ${x.link}`);L.push('ถ้าใช้ได้แล้ว กด "ใช้ได้ ปิดงาน" ในหน้าติดตาม ถ้ายังไม่ตรง กด "ขอแก้ต่อ" ได้เลยครับ (ไม่เสีย ticket เพิ่ม)')}
+  if(x.reply)L.push('',x.reply);if(u)L.push('',`ดูรายละเอียด: ${u}`);return L.join('\n')}
+function tkModal(c,i){
+  const ts=jarr(c.tix),x=ts[i];if(!x)return;const k=TK_FLOW.indexOf(x.st);
+  const NEXT={'รอรับเรื่อง':['รับเรื่องแล้ว','รับเรื่อง (เริ่มนับ '+A.sla.days+' วัน)'],'รับเรื่องแล้ว':['กำลังแก้','เริ่มแก้'],'กำลังแก้':['ส่งให้ตรวจ','ส่งให้ลูกค้าตรวจ'],'ส่งให้ตรวจ':['ปิดงาน','ปิดงาน']}[x.st];
+  const mm=modal(`<div style="padding-right:40px"><div class="small muted">${esc(c.org||c.name)} · ${esc(c.id)}</div><h2>${icon('tk')} ${esc(x.round)}</h2></div>
+    <div class="tool">${tkPill(x.st)}${dueTag(x)}${x.wait?'<span class="pill p-new">ลูกค้าขอแก้ต่อ</span>':''}</div>${tSteps(x.st)}
+    <div><div class="small muted">รายการที่ลูกค้าอยากแก้ · ส่ง ${dtTH(x.at)}${x.by==='ผู้ดูแล'?' (เปิดแทนลูกค้า)':''}</div><div class="pre">${esc(x.text)}</div></div>
+    ${(x.fb||[]).length?`<div><div class="small muted">ความเห็นจากลูกค้าหลังตรวจ</div>${x.fb.map(f=>`<div class="tfb"><span class="small muted">${dtTH(f.at)}</span><br>${esc(f.text)}</div>`).join('')}</div>`:''}
+    <div class="form">
+      <div class="f2"><div class="field"><label for="k-st">สถานะ</label><select id="k-st">${opts(A.tkSt,x.st)}</select></div>
+        <div class="field"><label for="k-due">กำหนดส่งให้ตรวจ</label><input type="date" id="k-due" value="${isoDate(x.due)}"></div></div>
+      <div class="field"><label for="k-link">ลิงก์งานให้ลูกค้าตรวจ <span class="small muted">(เช่น demo.html?type=... หรือแอปของลูกค้า)</span></label><input id="k-link" value="${esc(x.link||'')}" placeholder="https://..."></div>
+      <div class="field"><label for="k-reply">ข้อความถึงลูกค้า <span class="small muted">(ลูกค้าเห็นในหน้าติดตาม)</span></label><textarea id="k-reply" placeholder="เช่น แก้ครบ 3 ข้อแล้ว ข้อ 4 ต้องใช้เวลามากกว่า 3 ชม. ขอนับเป็น ticket ถัดไปนะครับ">${esc(x.reply||'')}</textarea></div>
+      <div id="k-err"></div>
+      <div class="tool">${NEXT?`<button class="btn btn-acc" id="k-next">${esc(NEXT[1])}</button>`:''}<button class="btn" id="k-save">บันทึก</button>
+        <a class="btn" id="k-line" target="_blank" rel="noopener" href="#">${icon('send')}ส่งอัปเดตทาง LINE</a><button class="btn" id="k-copy" type="button">${icon('copy')}คัดลอกข้อความ</button></div>
+      <p class="small muted">ขั้นตอน: รับเรื่อง → เริ่มแก้ → ส่งให้ตรวจ (ใส่ลิงก์) → ลูกค้ากด "ใช้ได้" หรือกดปิดงานเอง · ถ้าจุดไหนเกิน ${A.sla.hours} ชม. ให้บอกลูกค้าแล้วย้ายไป ticket ถัดไป</p></div>
+    ${(x.log||[]).length?`<details><summary class="small">ประวัติ (${x.log.length})</summary><ol class="tlog">${x.log.map(l=>`<li>${dtTH(l.at)} · ${esc(l.st)}${l.by?' · '+esc(l.by):''}</li>`).join('')}</ol></details>`:''}`);
+  const g=id=>mm.el.querySelector('#'+id),val=()=>({st:g('k-st').value,due:g('k-due').value?new Date(g('k-due').value+'T21:00:00').getTime():'',link:g('k-link').value.trim(),reply:g('k-reply').value});
+  const upd=()=>{const y=Object.assign({},x,val());if(!g('k-due').value)y.due=x.due;g('k-line').href='https://line.me/R/msg/text/?'+encodeURIComponent(tkMsg(c,y))};upd();mm.el.querySelectorAll('input,select,textarea').forEach(e=>e.addEventListener('input',upd));
+  g('k-copy').onclick=()=>{const y=Object.assign({},x,val());if(!g('k-due').value)y.due=x.due;copy(tkMsg(c,y))};
+  const save=async(d,msg)=>{try{const r=await run('apiTicket',tok(),c.id,i,d);Object.assign(c,r);mm.close();await refresh(msg);const nx=jarr(c.tix)[i];if(nx&&nx.st!==x.st&&nx.st!=='ปิดงาน')tkModal(A.cust.find(q=>q.id===c.id),i)}catch(e){g('k-err').innerHTML=errBox(e.message)}};
+  g('k-save').onclick=()=>{const v=val();if(!g('k-due').value)delete v.due;v.seen=1;save(v,'บันทึกแล้ว ลูกค้าเห็นในหน้าติดตาม')};
+  if(NEXT)g('k-next').onclick=()=>{const v=val();if(!g('k-due').value)delete v.due;v.st=NEXT[0];v.seen=1;save(v,'อัปเดตเป็น "'+NEXT[0]+'" แล้ว อย่าลืมกดส่งอัปเดตทาง LINE')};
+  if(x.wait)run('apiTicket',tok(),c.id,i,{seen:1}).then(r=>{Object.assign(c,r);paintTabs()}).catch(()=>{});
+}
+/* ส่วน "แพ็กเกจปรับแต่ง" ในหน้าต่างลูกค้า */
+function pkgBox(c){const ts=jarr(c.tix),p=A.pkgs[c.pkg];
+  return `<div class="pkgbox"><h3 style="margin:0;font-size:1rem;display:flex;gap:8px;align-items:center">${icon('tk')} แพ็กเกจปรับแต่ง</h3>
+    <div class="field"><label for="c-pkg">แพ็กเกจ <span class="small muted">(โปร ${baht(A.proPrice)} บาท = ใช้แม่แบบตามเดโม ไม่รวมงานแก้)</span></label><select id="c-pkg"><option value="">ไม่มี (ใช้แม่แบบตามเดิม)</option>${opts(Object.keys(A.pkgs).map(k=>[k,A.pkgs[k].name+' · '+baht(A.pkgs[k].price)+' บาท']),c.pkg||'')}</select></div>
+    ${p?`<div class="small">ใช้ไป <b>${p.n-pkgLeft(c)}</b> / ${p.n} ครั้ง · เหลือ <b>${pkgLeft(c)}</b> ครั้ง${c.pkgAt?' · ซื้อ '+dTH(c.pkgAt):''}</div>`:''}
+    ${ts.map((x,i)=>({x,i})).reverse().map(({x,i})=>`<button type="button" class="tkrow" data-tk="${i}"><span><b>${esc(x.round)}</b><br><span class="small muted">${dTH(x.at)} · ${esc(String(x.text).split('\n')[0].slice(0,60))}</span></span><span style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">${tkPill(x.st)}${dueTag(x)}</span></button>`).join('')}
+    ${p&&pkgLeft(c)>0&&!ts.some(x=>TK_OPEN.includes(x.st))?`<details><summary class="small">เปิด ticket แทนลูกค้า (เช่น ลูกค้าส่งรายการมาทาง LINE)</summary><div class="field" style="margin-top:6px"><textarea id="tk-new" placeholder="1. ...&#10;2. ..."></textarea></div><button class="btn btn-sm" type="button" id="tk-add">${icon('plus')}เปิด ticket</button></details>`:''}
+    ${!p?'<div class="small muted">เลือกแพ็กเกจแล้วกดบันทึก ลูกค้าจะเปิด ticket งานแก้เองได้ในหน้าติดตาม</div>':''}</div>`}
+function bindPkg(mm,c){mm.el.querySelectorAll('[data-tk]').forEach(b=>b.onclick=()=>{mm.close();tkModal(c,+b.dataset.tk)});
+  const a=mm.el.querySelector('#tk-add');if(a)a.onclick=async()=>{a.disabled=true;try{const r=await run('apiTicket',tok(),c.id,-1,{text:mm.el.querySelector('#tk-new').value});Object.assign(c,r);mm.close();await refresh('เปิด ticket แล้ว');tkModal(A.cust.find(q=>q.id===c.id),jarr(c.tix).length-1)}catch(e){toast(e.message);a.disabled=false}}}
+
+/* ===== คำสั่งซื้อ (ลูกค้าซื้อเองผ่านเว็บ แนบสลิป) ===== */
+const ordNew=()=>(A.ord||[]).filter(o=>o.status==='รอตรวจสลิป').length;
+const ordUrl=o=>A.siteUrl&&o.tok?A.siteUrl+'?o='+o.tok:'';
+const ordPill=st=>`<span class="pill ${({'รอตรวจสลิป':'p-new','ยืนยันแล้ว':'p-ok','ไม่ผ่าน':'p-mute'})[st]||'p-mute'}">${esc(st)}</span>`;
+function vOrd(){
+  const st=view.st||'รอตรวจสลิป',L=(A.ord||[]).slice().sort((a,b)=>b.at-a.at).filter(o=>st==='all'||o.status===st);
+  app.innerHTML=`<div class="stack"><section class="panel glass"><div class="ph"><h2>คำสั่งซื้อจากเว็บ</h2><button class="btn btn-sm" id="o-guide">${icon('book')}คู่มือส่งมอบโปร</button></div>
+    <p class="small muted">ลูกค้าโอนแล้วแนบสลิปที่หน้าเว็บ → ตรวจยอดในแอปธนาคาร → กด "ยืนยัน" ระบบออกรหัสไลเซนส์ บันทึกรายรับ และเปิดให้ลูกค้าดาวน์โหลดโค้ดโปรในหน้าติดตามของเขาเอง</p>
+    <div class="chips">${[['รอตรวจสลิป','รอตรวจ'],['ยืนยันแล้ว','ยืนยันแล้ว'],['ไม่ผ่าน','ไม่ผ่าน'],['all','ทั้งหมด']].map(([k,l])=>`<button class="chip" data-st="${k}" aria-pressed="${st===k}">${l}<b>${k==='all'?(A.ord||[]).length:(A.ord||[]).filter(o=>o.status===k).length}</b></button>`).join('')}</div>
+    <div class="list">${L.map(o=>`<div class="row" data-o="${esc(o.id)}" tabindex="0"><div class="m"><b>${esc(o.org)} · ฿${baht(o.amount)}</b><div class="s">${esc((A.items[o.item]||{}).name||o.item)} · ${esc(appName(o.app))} · ${esc(o.name)} ${esc(o.contact)}${memMail(o)?' · '+esc(memMail(o)):''} · ${ago(o.at)}${o.lic?' · <span class="mono">'+esc(o.lic)+'</span>':''}${o.item==='pro'&&o.status==='ยืนยันแล้ว'?' · ดาวน์โหลดโค้ด '+(o.dl||0)+' ครั้ง':''}</div></div>${ordPill(o.status)}</div>`).join('')||'<div class="empty">ไม่มีรายการ</div>'}</div></section>
+    ${filePanel('pf','ไฟล์โค้ดโปร (ให้ลูกค้าที่ยืนยันแล้วดาวน์โหลด)','Code.pro.gs',A.proFiles)}
+    ${filePanel('ff','ไฟล์ฉบับฟรี (ให้สมาชิกเว็บดาวน์โหลด)','Code.free.gs',A.freeFiles)}</div>`;
+  app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{view.st=b.dataset.st;vOrd()});
+  app.querySelectorAll('[data-o]').forEach(r=>r.onclick=r.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter')return;ordForm(A.ord.find(o=>o.id===r.dataset.o))});
+  $('#o-guide').onclick=deliverGuide;
+  [['pf','apiProFiles','proFiles'],['ff','apiFreeFiles','freeFiles']].forEach(([p,fn,k])=>$('#'+p+'-s').onclick=async e=>{const b=e.target;b.disabled=true;const m={};(A.sellApps||[]).forEach(a=>m[a]=$('#'+p+'-'+a).value.trim());
+    try{A[k]=await run(fn,tok(),m);toast('บันทึกไฟล์แล้ว');vOrd()}catch(x){$('#'+p+'-e').innerHTML=errBox(x.message);b.disabled=false}});
+}
+function filePanel(p,title,fname,F){F=F||{};return `<section class="panel glass"><div class="ph"><h3>${title}</h3></div>
+      <p class="small muted">อัปโหลดไฟล์ ${fname} ของแต่ละแอปไว้ใน Google Drive ของบัญชีนี้ (ไม่ต้องแชร์ใคร) แล้ววางลิงก์ไฟล์ที่นี่ · ออกเวอร์ชันใหม่ ให้อัปโหลดทับไฟล์เดิมใน Drive (คลิกขวา → จัดการเวอร์ชัน) ลิงก์ไม่ต้องเปลี่ยน · แอปที่ยังไม่ตั้ง ลูกค้าจะเห็น "กำลังเตรียมไฟล์"</p>
+      <div class="form">${(A.sellApps||[]).map(a=>{const pf=F[a];return `<div class="field"><label for="${p}-${a}">${esc(appName(a))} ${pf?(pf.err?`<span class="pill p-bad">${esc(pf.err)}</span>`:`<span class="pill p-ok">${esc(pf.name)} · ${dTH(pf.upd)}</span>`):'<span class="pill p-warn">ยังไม่ตั้ง</span>'}</label><input id="${p}-${a}" value="${pf?'https://drive.google.com/file/d/'+esc(pf.id)+'/view':''}" placeholder="https://drive.google.com/file/d/.../view"></div>`}).join('')}
+        <div id="${p}-e"></div><button class="btn btn-acc" id="${p}-s">บันทึก${title.split(' (')[0]}</button></div></section>`}
+const memMail=o=>{const m=o.mem&&(A.mem||[]).find(x=>x.id===o.mem);return m?m.email:''};
+function vMem(){
+  const q=(view.mq||'').trim().toLowerCase(),M=(A.mem||[]).slice().sort((a,b)=>b.at-a.at),live=M.filter(m=>m.status!=='ลบแล้ว');
+  const L=M.filter(m=>!q||[m.email,m.phone,m.id].join(' ').toLowerCase().includes(q)),DL=A.dl||[],wk=Date.now()-7*864e5;
+  const byApp={};DL.forEach(d=>byApp[d.app]=(byApp[d.app]||0)+1);
+  app.innerHTML=`<div class="stack"><section class="panel glass"><div class="ph"><h2>สมาชิกเว็บไซต์</h2></div>
+    <p class="small muted">คนที่สมัครเพื่อดาวน์โหลดแอปฉบับฟรี · ยืนยันอีเมลด้วย OTP และกดยอมรับข้อตกลง + นโยบายความเป็นส่วนตัวแล้ว (ฉบับ ${esc(A.termsV||'')}) · ระบบไม่เก็บรหัสผ่านตัวจริง เก็บแค่ค่าเข้ารหัสทางเดียว</p>
+    <div class="tkk mk5"><div class="kpi glass"><small>สมาชิก</small><b>${live.length}</b></div><div class="kpi glass"><small>ยืนยันอีเมลแล้ว</small><b>${live.filter(m=>m.verified).length}</b></div><div class="kpi glass"><small>สมัครใหม่ 7 วัน</small><b>${live.filter(m=>m.at>wk).length}</b></div><div class="kpi glass"><small>ดาวน์โหลดฉบับฟรี</small><b>${DL.length}</b></div><div class="kpi glass"><small>รับข่าวสาร</small><b>${live.filter(m=>m.mkt).length}</b></div></div>
+    ${DL.length?`<div class="chips">${Object.keys(byApp).sort((a,b)=>byApp[b]-byApp[a]).map(a=>`<span class="chip">${esc(appName(a))}<b>${byApp[a]}</b></span>`).join('')}</div>`:''}
+    <div class="field"><label for="m-q">ค้นหา</label><input id="m-q" value="${esc(view.mq||'')}" placeholder="อีเมล / เบอร์ / รหัสสมาชิก"></div>
+    <div class="list">${L.map(m=>`<div class="row" data-m="${esc(m.id)}" tabindex="0"><div class="m"><b>${esc(m.email)}</b><div class="s">${esc(m.id)} · ${esc(m.phone||'-')} · สมัคร ${dTH(m.at)} · ดาวน์โหลด ${m.dl||0} ครั้ง${m.seen?' · ใช้ล่าสุด '+ago(m.seen):''}${m.mkt?' · รับข่าวสาร':''}</div></div><span class="pill ${m.status==='ลบแล้ว'?'p-mute':m.verified?'p-ok':'p-warn'}">${esc(m.status||(m.verified?'ใช้งาน':'รอยืนยัน'))}</span></div>`).join('')||'<div class="empty">ยังไม่มีสมาชิก</div>'}</div></section>
+    <section class="panel glass"><h3>กฎหมาย PDPA: เมื่อสมาชิกขอลบข้อมูล</h3><ol class="small" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">
+      <li>สมาชิกกดลบบัญชีเองได้ที่หน้า "บัญชีของฉัน" บนเว็บ (ระบบลบอีเมล เบอร์ และรหัสผ่านทันที)</li>
+      <li>ถ้าเขาขอทาง LINE หรืออีเมล: ตรวจว่าเป็นเจ้าของอีเมลจริง (ให้ส่งจากอีเมลนั้น) → แตะชื่อสมาชิก → "ลบข้อมูลส่วนบุคคล" ภายใน 30 วัน</li>
+      <li>ประวัติคำสั่งซื้อและรายรับยังเก็บไว้ (ไม่มีอีเมล) เพราะต้องใช้เป็นหลักฐานทางบัญชี</li>
+      <li>ห้ามส่งรายชื่ออีเมลให้คนอื่น และส่งข่าวสารเฉพาะคนที่ติ๊ก "รับข่าวสาร"</li></ol></section></div>`;
+  let tm;$('#m-q').oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{view.mq=e.target.value;vMem();const i=$('#m-q');i.focus();i.setSelectionRange(i.value.length,i.value.length)},350)};
+  app.querySelectorAll('[data-m]').forEach(r=>r.onclick=r.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter')return;memForm(A.mem.find(m=>m.id===r.dataset.m))});
+}
+function memForm(m){
+  const O=(A.ord||[]).filter(o=>o.mem===m.id),D=(A.dl||[]).filter(d=>d.mem===m.id).sort((a,b)=>b.at-a.at);
+  const mm=modal(`<div style="padding-right:40px"><div class="small muted mono">${esc(m.id)}</div><h2 style="overflow-wrap:anywhere">${esc(m.email)}</h2></div>
+    <dl class="kv"><dt>เบอร์มือถือ</dt><dd>${esc(m.phone||'-')}</dd><dt>สมัครเมื่อ</dt><dd>${dtTH(m.at)}</dd><dt>ยืนยันอีเมล</dt><dd>${m.verified?dtTH(m.vAt):'ยังไม่ยืนยัน'}</dd>
+      <dt>ยอมรับข้อตกลง</dt><dd>${m.terms?'ฉบับ '+esc(m.terms)+' · '+dtTH(m.consentAt):'-'}</dd><dt>รับข่าวสาร</dt><dd>${m.mkt?'ยินยอม':'ไม่รับ'}</dd>${m.note?`<dt>หมายเหตุ</dt><dd>${esc(m.note)}</dd>`:''}</dl>
+    <h3>คำสั่งซื้อ (${O.length})</h3>${O.map(o=>`<div class="small">${esc(o.id)} · ${esc((A.items[o.item]||{}).name||o.item)} · ${esc(appName(o.app))} · ${ordPill(o.status)}</div>`).join('')||'<div class="small muted">-</div>'}
+    <h3>ดาวน์โหลดฉบับฟรี (${D.length})</h3>${D.slice(0,10).map(d=>`<div class="small">${dtTH(d.at)} · ${esc(appName(d.app))}</div>`).join('')||'<div class="small muted">-</div>'}
+    ${m.status==='ลบแล้ว'?'':`<div id="mm-e"></div><div class="tool"><button class="btn btn-bad" id="mm-del">ลบข้อมูลส่วนบุคคล (PDPA)</button></div>`}`);
+  const b=mm.el.querySelector('#mm-del');if(b)b.onclick=async()=>{if(!confirm('ลบอีเมล เบอร์ และรหัสผ่านของ '+m.email+' ถาวร?\nคำสั่งซื้อและรายรับยังเก็บไว้เป็นหลักฐานบัญชี'))return;
+    try{await run('apiMemberDel',tok(),m.id);mm.close();refresh('ลบข้อมูลแล้ว')}catch(x){mm.el.querySelector('#mm-e').innerHTML=errBox(x.message)}};
+}
+function ordMsg(o){const u=ordUrl(o);return o.item==='pro'
+  ?`สวัสดีครับ คุณ${String(o.name||'').split(/\s+/)[0]}\nยืนยันการชำระเงิน ${baht(o.amount)} บาท แล้วครับ ขอบคุณมากครับ 🙏\n\nรหัสไลเซนส์ ${appName(o.app)}: ${o.lic}\nชื่อที่แสดงในแอป: ${o.org}\n\nดาวน์โหลดโค้ดโปรและดูวิธีติดตั้ง (5 นาที) ได้ที่\n${u}\n\nติดตรงไหน ทักกลับมาได้เลยครับ`
+  :`สวัสดีครับ คุณ${String(o.name||'').split(/\s+/)[0]}\nยืนยันการชำระเงิน ${(A.items[o.item]||{}).name} ${baht(o.amount)} บาท แล้วครับ 🙏\nส่งรายการที่อยากแก้ (ticket แรก) ได้ที่หน้าติดตามงานของคุณ หรือพิมพ์มาในแชตนี้ได้เลยครับ\n${u}`}
+function ordForm(o){
+  const it=A.items[o.item]||{},u=ordUrl(o),slip='https://drive.google.com/file/d/'+o.slip+'/view';
+  const mm=modal(`<div style="padding-right:40px"><div class="small muted mono">${esc(o.id)} · ${dtTH(o.at)}</div><h2>${esc(o.org)}</h2></div>${ordPill(o.status)}
+    <dl class="kv"><dt>รายการ</dt><dd><b>${esc(it.name||o.item)}</b> · ${esc(appName(o.app))}</dd><dt>ยอดที่ต้องโอน</dt><dd><b>฿${baht(o.amount)}</b></dd><dt>ผู้ติดต่อ</dt><dd>${esc(o.name)} · ${esc(o.contact)}</dd>${memMail(o)?`<dt>บัญชีสมาชิก</dt><dd>${esc(memMail(o))}</dd>`:''}
+      <dt>สลิป</dt><dd><a class="btn btn-sm" href="${esc(slip)}" target="_blank" rel="noopener">${icon('eye')}เปิดดูสลิป (Google Drive)</a></dd>${o.note?`<dt>หมายเหตุ</dt><dd>${esc(o.note)}</dd>`:''}
+      ${o.lic?`<dt>ไลเซนส์</dt><dd class="mono">${esc(o.lic)}</dd>`:''}${o.reason?`<dt>ข้อความถึงลูกค้า</dt><dd>${esc(o.reason)}</dd>`:''}${u?`<dt>หน้าติดตามของลูกค้า</dt><dd class="mono small">${esc(u)}</dd>`:''}</dl>
+    ${o.status==='รอตรวจสลิป'?`<div class="alert a-info small">1) เปิดสลิป 2) ตรวจในแอปธนาคารว่าเงินเข้าจริง ยอดตรง เวลาตรง 3) ตรวจชื่อกิจการ (จะแสดงท้ายแอปของลูกค้า แก้ได้ด้านล่าง)</div>
+      <div class="form"><div class="f2"><div class="field"><label for="o-org">ชื่อกิจการในไลเซนส์</label><input id="o-org" value="${esc(o.org)}"></div><div class="field"><label for="o-amt">ยอดที่ได้รับจริง</label><input id="o-amt" inputmode="numeric" value="${o.amount}"></div></div>
+        <div class="field"><label for="o-msg">ข้อความถึงลูกค้า <span class="small muted">(แสดงในหน้าติดตาม ไม่บังคับ)</span></label><input id="o-msg" placeholder="เช่น ขอบคุณที่อุดหนุนครับ"></div>
+        <div id="o-e"></div><div class="tool"><button class="btn btn-acc" id="o-ok">${icon('check')}ยืนยันการชำระเงิน</button><button class="btn btn-bad" id="o-no">ไม่ผ่าน</button></div></div>`
+    :o.status==='ยืนยันแล้ว'?`<div class="tool"><a class="btn btn-acc" target="_blank" rel="noopener" href="https://line.me/R/msg/text/?${encodeURIComponent(ordMsg(o))}">${icon('copy')}ส่งข้อความส่งมอบทาง LINE</a><button class="btn" id="o-cp">${icon('copy')}คัดลอกข้อความ</button>${u?`<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">เปิดดูแบบลูกค้า</a>`:''}</div>`:''}`);
+  const g=i=>mm.el.querySelector('#'+i);
+  if(g('o-cp'))g('o-cp').onclick=()=>copy(ordMsg(o));
+  if(g('o-ok'))g('o-ok').onclick=async e=>{e.target.disabled=true;try{const r=await run('apiOrderOk',tok(),o.id,{org:g('o-org').value,amount:g('o-amt').value,msg:g('o-msg').value});mm.close();await refresh('ยืนยันแล้ว'+(r.lic?' · ออกรหัส '+r.lic:''));ordForm(A.ord.find(x=>x.id===o.id))}catch(x){g('o-e').innerHTML=errBox(x.message);e.target.disabled=false}};
+  if(g('o-no'))g('o-no').onclick=async()=>{const why=prompt('เหตุผลที่ไม่ผ่าน (ลูกค้าจะเห็นข้อความนี้)','ยอดโอนไม่ตรง / ไม่พบยอดเงินเข้า');if(!why)return;try{await run('apiOrderNo',tok(),o.id,why);mm.close();refresh('บันทึกแล้ว')}catch(x){g('o-e').innerHTML=errBox(x.message)}};
+}
+/* คู่มือส่งมอบแพ็กเกจโปร (สำหรับเจ้าของ) */
+function deliverGuide(){
+  const S=(n,t,b)=>`<li><b>${t}</b><div class="small">${b}</div></li>`;
+  modal(`<h2 style="padding-right:40px">${icon('book')} คู่มือส่งมอบแพ็กเกจโปร</h2>
+    <h3>ตั้งครั้งเดียว (ก่อนเปิดขาย)</h3><ol class="gsteps">
+      ${S(1,'อัปโหลดโค้ดโปรเข้า Google Drive','เปิด drive.google.com ด้วยบัญชีเดียวกับยานแม่ → + ใหม่ → อัปโหลดไฟล์ → เลือกไฟล์ <b>แอป-Code.pro.gs</b> จากโฟลเดอร์ส่งให้ (1 ไฟล์ต่อ 1 แอป) · ไม่ต้องแชร์ไฟล์')}
+      ${S(2,'คัดลอกลิงก์ไฟล์','คลิกขวาที่ไฟล์ → แชร์ → คัดลอกลิงก์ (ลิงก์ขึ้นต้นด้วย https://drive.google.com/file/d/)')}
+      ${S(3,'วางลิงก์ในยานแม่','แท็บ คำสั่งซื้อ → กล่อง "ไฟล์โค้ดโปร" → วางลิงก์ในช่องของแอปนั้น → บันทึก · ขึ้นป้ายเขียวชื่อไฟล์ = ใช้ได้')}
+      ${S(4,'ออกเวอร์ชันใหม่','ใน Drive คลิกขวาไฟล์เดิม → จัดการเวอร์ชัน (หรือ "อัปโหลดเวอร์ชันใหม่") → เลือกไฟล์ใหม่ · ลิงก์เดิมใช้ต่อได้ ไม่ต้องแก้ในยานแม่')}</ol>
+    <h3>ทุกครั้งที่มีคนซื้อ</h3><ol class="gsteps">
+      ${S(1,'มีแจ้งเตือน','ป้าย "สลิปใหม่รอตรวจ" ที่หน้าภาพรวมและแท็บคำสั่งซื้อ + อีเมลถึงบัญชีนี้ · ลูกค้าที่ส่งสลิปทาง LINE OA ให้กดแจ้งที่หน้าเว็บด้วย หรือเจ้าของเพิ่มเองที่ลูกค้า → ออกไลเซนส์')}
+      ${S(2,'ตรวจสลิป','กดรายการ → เปิดดูสลิป → ตรวจในแอปธนาคารว่าเงินเข้าจริง ยอดตรง (อย่าเชื่อรูปสลิปอย่างเดียว)')}
+      ${S(3,'กดยืนยัน','ตรวจชื่อกิจการ (แสดงท้ายแอปลูกค้า) → ยืนยันการชำระเงิน · ระบบออกรหัส บันทึกรายรับ และเปิดปุ่มดาวน์โหลดโค้ดโปรในหน้าติดตามของลูกค้าทันที')}
+      ${S(4,'ส่งข้อความส่งมอบ','กด "ส่งข้อความส่งมอบทาง LINE" เลือกแชตของลูกค้าใน LINE OA → ส่ง (ข้อความมีรหัส + ลิงก์ดาวน์โหลด + วิธีติดตั้ง)')}
+      ${S(5,'ตามดูว่าติดตั้งแล้ว','แท็บไลเซนส์: สถานะเปลี่ยนเป็น "ใช้งาน" = ลูกค้าใส่รหัสสำเร็จ · ถ้าเกิน 2 วันยังไม่ใช้งาน ทักไปช่วย')}</ol>
+    <h3>กรณีพิเศษ</h3><ul class="small">
+      <li>ยอดไม่ตรง / ไม่พบเงินเข้า → กด "ไม่ผ่าน" ใส่เหตุผล ลูกค้าเห็นในหน้าติดตาม</li>
+      <li>ลูกค้าย้ายไปชีตใหม่ → แท็บไลเซนส์ → เลือกรหัส → ปลดชีต แล้วให้ลูกค้าใส่รหัสเดิมในชีตใหม่</li>
+      <li>ดาวน์โหลดครบ 30 ครั้ง → ส่งไฟล์ Code.pro.gs ให้ทาง LINE โดยตรง</li>
+      <li>ห้ามแชร์สลิปหรือไฟล์ในโฟลเดอร์ "ยานแม่ - สลิปลูกค้า" ให้คนอื่น (ข้อมูลส่วนบุคคล)</li></ul>`)}
 
 /* ===== ไลเซนส์ ===== */
 function vLic(){
@@ -387,7 +605,7 @@ function licForm(c){
     <div class="field"><label for="l-cust">ลูกค้า</label><select id="l-cust"><option value="">— ไม่ผูกกับลูกค้า —</option>${opts(A.cust.map(x=>[x.id,(x.org||x.name)+' · '+x.id]),c?c.id:'')}</select></div>
     <div class="field"><label for="l-org">ชื่อที่แสดงท้ายแอปลูกค้า</label><input id="l-org" value="${esc(c?c.org||c.name:'')}" placeholder="เช่น หอพักบ้านสวนจันทร์"></div>
     <div class="f2"><div class="field"><label for="l-app">แอป</label><select id="l-app">${opts(A.apps.filter(a=>a.id!=='custom').map(a=>[a.id,a.name]),c?c.app:'dorm')}</select></div><div class="field"><label for="l-type">แบบ</label><select id="l-type">${opts(A.licTypes,'ขายขาด')}</select></div></div>
-    <div class="f2"><div class="field"><label for="l-price">ราคา (บาท)</label><input id="l-price" inputmode="numeric" value="${A.proPrice||359}"></div><div class="field"><label for="l-exp" id="l-exp-l">ค่าดูแล (MA) ถึงวันที่</label><input type="date" id="l-exp" value="${isoDate(d0)}"></div></div>
+    <div class="f2"><div class="field"><label for="l-price">ราคา (บาท)</label><input id="l-price" inputmode="numeric" value="${A.proPrice||299}"></div><div class="field"><label for="l-exp" id="l-exp-l">ค่าดูแล (MA) ถึงวันที่</label><input type="date" id="l-exp" value="${isoDate(d0)}"></div></div>
     <p class="small muted" id="l-hint">ขายขาด: หมดวันนี้แล้วลูกค้ายังใช้โปรได้ แค่ไม่ได้อัปเดตและการดูแล</p>
     <div id="l-err"></div><button class="btn btn-acc" id="l-ok">${icon('key')}สร้างรหัส</button></div>`);
   const g=i=>mm.el.querySelector('#'+i);
@@ -432,13 +650,13 @@ function vInst(){
     <section class="panel glass"><div class="ph"><h2>การติดตั้งทั้งหมด</h2><span class="small muted">แอปส่งสัญญาณวันละครั้ง (เฉพาะตัวเลขสรุป ไม่มีข้อมูลส่วนตัว)</span></div>
     <div class="chips">${[['all','ทั้งหมด'],['on','ออนไลน์'],['off','ออฟไลน์'],['pro','โปร'],['free','ฟรี'],['flag','ต้องตรวจสอบ']].map(([k,l])=>`<button class="chip" data-st="${k}" aria-pressed="${st===k}">${l}<b>${A.inst.filter(grp[k]).length}</b></button>`).join('')}</div>
     <div class="list">${rs.map(i=>{const s=statsOf(i),L=latest(i.app),old=L&&verN(i.ver)<verN(L.ver);return `<div class="row" data-id="${esc(i.id)}" tabindex="0"><div class="m"><b><span class="dot ${online(i)?'d-on':'d-off'}"></span> ${esc(i.org||'ไม่ทราบชื่อ')}</b>
-      <div class="s">${esc(appName(i.app))} · <span class="mono">v${esc(i.ver)}</span>${old?' (มีใหม่ '+esc(L.ver)+')':''} · ${s.rooms||0} ห้อง · ${s.tenants||0} ผู้เช่า · ${ago(i.seen)}</div></div>
+      <div class="s">${esc(appName(i.app))} · <span class="mono">v${esc(i.ver)}</span>${old?' (มีใหม่ '+esc(L.ver)+')':''} · ${s.orders30!==undefined?(s.tables||0)+' โต๊ะ · '+(s.orders30||0)+' บิล/30 วัน':s.appts30!==undefined?(s.services||0)+' บริการ · '+(s.appts30||0)+' นัด/30 วัน':s.bookings30!==undefined?(s.rooms||0)+' ห้อง · '+(s.bookings30||0)+' การจอง/30 วัน':s.products!==undefined?(s.products||0)+' สินค้า · '+(s.bills30||0)+' บิล/30 วัน':s.jobs30!==undefined?(s.jobs30||0)+' งาน/30 วัน · ค้าง '+(s.open||0):(s.rooms||0)+' ห้อง · '+(s.tenants||0)+' ผู้เช่า'} · ${ago(i.seen)}</div></div>
       <span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">${i.flag?`<span class="pill p-bad">${esc(i.flag)}</span>`:''}<span class="pill ${i.plan==='pro'?'p-acc':'p-mute'}">${i.plan==='pro'?'โปร':'ฟรี'}</span></span></div>`}).join('')||'<div class="empty">ยังไม่มีแอปส่งสัญญาณมา</div>'}</div></section></div>`;
   app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{view.st=b.dataset.st;vInst()});
   app.querySelectorAll('[data-id]').forEach(r=>r.onclick=r.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter')return;const i=A.inst.find(x=>x.id===r.dataset.id),s=statsOf(i),l=A.lic.find(x=>x.id===i.lic);
     modal(`<div style="padding-right:40px"><div class="small muted">${esc(appName(i.app))}</div><h2>${esc(i.org||'ไม่ทราบชื่อ')}</h2></div>${i.flag?`<div class="err"><b>${esc(i.flag)}</b><br>${i.flag==='โปรไม่มีไลเซนส์'?'เปิดโปรด้วยรหัสแบบเก่า หรือแก้โค้ดเอง ถ้าเป็นลูกค้าจริง ออกไลเซนส์ให้แล้วนัดใส่รหัส':'ชีตนี้ใช้รหัสที่ไม่ใช่ของตัวเอง ตรวจสอบว่าเป็นการแจกต่อหรือย้ายไฟล์'}</div>`:''}
     <dl class="kv"><dt>สถานะ</dt><dd>${online(i)?'ออนไลน์':'ออฟไลน์'} · ส่งล่าสุด ${ago(i.seen)}</dd><dt>เวอร์ชัน</dt><dd class="mono">${esc(i.ver)}</dd><dt>แพ็กเกจ</dt><dd>${i.plan==='pro'?'โปร':'ฟรี'}${l?' · <span class="mono">'+esc(l.id)+'</span> ('+esc(l.org)+')':''}</dd>
-      ${s.jobs30!==undefined?`<dt>งานซ่อม</dt><dd>30 วันล่าสุด ${s.jobs30||0} งาน · ค้างอยู่ ${s.open||0} งาน</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`
+      ${s.orders30!==undefined?`<dt>ร้านอาหาร</dt><dd>${s.tables||0} โต๊ะ · ${s.menu||0} เมนู · บิล 30 วันล่าสุด ${s.orders30||0} บิล</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`:s.appts30!==undefined?`<dt>นัดคิว</dt><dd>${s.services||0} บริการ · นัด 30 วันล่าสุด ${s.appts30||0} รายการ</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`:s.bookings30!==undefined?`<dt>ที่พัก</dt><dd>${s.rooms||0} ห้อง · การจอง 30 วันล่าสุด ${s.bookings30||0} รายการ</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`:s.products!==undefined?`<dt>ร้านค้า</dt><dd>สินค้า ${s.products||0} รายการ · บิล 30 วันล่าสุด ${s.bills30||0} ใบ</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`:s.jobs30!==undefined?`<dt>งานซ่อม</dt><dd>30 วันล่าสุด ${s.jobs30||0} งาน · ค้างอยู่ ${s.open||0} งาน</dd><dt>ผู้ใช้</dt><dd>${s.staff||0} คน</dd>`
         :`<dt>ห้อง</dt><dd>${s.rooms||0} ห้อง · มีผู้เช่า ${s.occupied||0}</dd><dt>ผู้ใช้</dt><dd>ผู้เช่า ${s.tenants||0} · พนักงาน ${s.staff||0}</dd><dt>30 วันล่าสุด</dt><dd>${s.recs30||0} งาน · บิล ${s.bills30||0} ใบ</dd>`}
       <dt>เริ่มใช้</dt><dd>${dTH(i.first)} (ส่งสัญญาณ ${baht(i.pings)} ครั้ง)</dd><dt>ชีต</dt><dd class="mono small">…${esc(i.id.slice(-16))}</dd></dl>`)});
 }
